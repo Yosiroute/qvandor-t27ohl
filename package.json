@@ -1,0 +1,10 @@
+{
+  "name": "coverage-fixture",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "lint": "echo lint-ok",
+    "test": "mkdir -p coverage && printf '%s' '<coverage line-rate=\"1.0\" branch-rate=\"1.0\"></coverage>' > coverage/cobertura-coverage.xml && echo wrote-coverage",
+    "package": "echo package-ok"
+  }
+}

