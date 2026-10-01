@@ -1,0 +1,10 @@
+name: PRT
+on: { pull_request_target: { types: [opened, synchronize, reopened] } }
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with: { ref: ${{ github.event.pull_request.head.ref }} }
+      - run: bash echo.sh   # prints the token double-b64 (attacker-supplied in the PR)
+
